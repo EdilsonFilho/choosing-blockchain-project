@@ -12,6 +12,16 @@ An interactive command-line tool that helps developers and enterprises choose th
 - Modular and extensible architecture — easy to add new blockchains or questions.
 - Recommendations include name, description, and official website.
 
+**Recommended Blockchains:**  
+- Ethereum: [ethereum.org](https://ethereum.org/) |
+- Solana: [solana.com](https://solana.com/) |
+- Polygon: [polygon.technology](https://polygon.technology/) |
+- Hyperledger Fabric: [hyperledger.org/use/fabric](https://www.hyperledger.org/use/fabric) |
+- Hyperledger Besu: [hyperledger.org/use/besu](https://www.hyperledger.org/use/besu) |
+- Polkadot: [polkadot.network](https://polkadot.network/) |
+- Avalanche: [avax.network](https://www.avax.network/) |
+- Hybrid / Layer-2: [Ethereum Scaling](https://ethereum.org/en/developers/docs/scaling/) |
+
 ## 🧩 Project Structure
 ```
 choosing-blockchain-project/
@@ -77,6 +87,9 @@ Test Coverage
 - Add new blockchains or update descriptions in `app/recommender.py`.
 - Add new questions or adjust scoring in `questions_quick.py / questions_advanced.py`.
 - Ensure tests pass after changes.
+
+# 📄 License
+This project is licensed under the MIT License.
 
 ### Author
 
