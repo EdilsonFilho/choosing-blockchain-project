@@ -36,28 +36,22 @@ recommendations = {
         "name": "Avalanche",
         "description": "Public, scalable blockchain supporting custom subnetworks, high throughput, and low fees.",
         "website": "https://www.avax.network/"
+    },
+    "hybrid_layer2": {
+        "name": "Hybrid / Layer-2 solutions",
+        "description": "Use a combination of public and private blockchains. Layer-2 solutions like Rollups, sidechains, or hybrid setups allow scalability, privacy, and cost efficiency.",
+        "website": "https://ethereum.org/en/developers/docs/scaling/"
     }
 }
 
 def recommend_blockchain(answers: list[bool]) -> str:
-    """
-    Given a list of boolean answers, returns the key of the recommended blockchain.
-    The key corresponds to the 'recommendations' dictionary.
-    """
+    score_public = sum(answers[i] for i in [0,4,5,7,13,15,23,24])
+    score_private = sum(answers[i] for i in [1,2,6,9,18,20,27,29])
+    score_defi = sum(answers[i] for i in [12,4,15])
+    score_nft = sum(answers[i] for i in [5,16])
 
-    # Basic scoring weights
-    score_public = sum(answers[i] for i in [0, 4, 5, 7, 13, 15, 23, 24])
-    score_private = sum(answers[i] for i in [1, 2, 6, 9, 18, 20, 27, 29])
-    score_enterprise = sum(answers[i] for i in [6, 9, 18, 20, 27, 28, 29])
-    score_defi = sum(answers[i] for i in [12, 4, 15])
-    score_nft = sum(answers[i] for i in [5, 16])
-
-    # Decision logic returns the key
     if score_private > score_public:
-        if answers[7]:  # Smart contracts
-            return "hyperledger_besu"
-        else:
-            return "hyperledger_fabric"
+        return "hyperledger_besu" if answers[7] else "hyperledger_fabric"
 
     if score_defi > 3:
         return "ethereum"
@@ -71,4 +65,8 @@ def recommend_blockchain(answers: list[bool]) -> str:
     if answers[5] or score_nft > 1:
         return "polygon"
 
-    return "avalanche"
+    # fallback: if it is not clear → Hybrid / Layer-2
+    return "hybrid_layer2"
+
+
+
