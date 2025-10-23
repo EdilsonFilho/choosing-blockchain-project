@@ -1,6 +1,7 @@
 # app/utils.py
 from rich.console import Console
 from rich.prompt import Prompt
+from app.recommender import recommendations  # ✅ import no topo
 
 console = Console()
 
@@ -21,6 +22,14 @@ def print_header(title: str):
     """Print a stylized section header."""
     console.print(f"\n[bold green]--- {title.upper()} ---[/bold green]\n")
 
-def print_result(message: str):
-    """Print the final recommendation message."""
-    console.print(f"\n[bold yellow]{message}[/bold yellow]\n")
+def print_result(recommendation_key: str):
+    """
+    Print recommendation using the centralized 'recommendations' dict.
+    """
+    rec = recommendations.get(recommendation_key)
+    if rec:
+        console.print(f"\n[bold yellow]{rec['name']}[/bold yellow]")
+        console.print(f"[cyan]{rec['description']}[/cyan]")
+        console.print(f"[blue underline]{rec['website']}[/blue underline]\n")
+    else:
+        console.print(f"[red]Recommendation not found for key: {recommendation_key}[/red]")
